@@ -12,20 +12,27 @@ document.onclick = function() {
 
        source.connect(analyser);
        analyser.connect(audioCtx.destination);
-       analyser.fftSize = 128;
+       analyser.fftSize = 256;
    }
 
    var canvas = document.getElementById('canvas');
    var c = canvas.getContext('2d');
 
    canvas.width = innerWidth;
-   canvas.height = innerHeight;
+   canvas.height = innerHeight-150;
 
-   c.lineWidth = 10;
-   c.lineCap = "round";
+
    var padding = 5;
 
-   var loudnessGradient;
+   var loudnessGradient = c.createLinearGradient(canvas.width, canvas.height/2-100, canvas.width, canvas.height/2+100);;
+
+   loudnessGradient.addColorStop(0, "red");
+   loudnessGradient.addColorStop(0.25, "orange");
+   loudnessGradient.addColorStop(0.5, "lime");
+   loudnessGradient.addColorStop(0.75, "orange");
+   loudnessGradient.addColorStop(1, "red");
+
+
 
    let frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
@@ -33,24 +40,32 @@ document.onclick = function() {
        analyser.getByteFrequencyData(frequencyData);
        c.fillStyle = "white";
        c.fillRect(0, 0, canvas.width, canvas.height);
+
+       c.strokeStyle = loudnessGradient;
+       c.lineWidth = 10;
+       c.lineCap = "round";
        for (var i = 0; i < frequencyData.length; i++) {
-            loudnessGradient = c.createLinearGradient((i*padding) + (i*10) + 10, canvas.height/2-((frequencyData[i])/2), 10, frequencyData[i]);
-           /*loudnessGradient.addColorStop(0.5, "lime");
-           loudnessGradient.addColorStop(0.75, "orange");
-           loudnessGradient.addColorStop(1, "red");*/
+           if (frequencyData[i] != 0) {
+             c.beginPath();
+             c.moveTo((i*padding) + (i*10) + 10, canvas.height/2-((frequencyData[i])/2));
+             c.lineTo((i*padding) + (i*10) + 10, canvas.height/2+((frequencyData[i])/2));
+             c.stroke();
+           }
+       }
 
-            loudnessGradient.addColorStop(0, 'rgba(255,0,0,1)');
-            loudnessGradient.addColorStop(0.25, 'rgba(255,165,0,1)');
-            loudnessGradient.addColorStop(0.5, 'rgba(0,255,0,1)');
-            loudnessGradient.addColorStop(0.75, 'rgba(255,165,0,1)');
-            loudnessGradient.addColorStop(1, 'rgba(255,0,0,1)');
+       c.strokeStyle = "black";
+       c.lineWidth = 2;
+       c.lineCap = "round";
 
-           c.strokeStyle = loudnessGradient;
+       for (var i = 0; i < frequencyData.length; i++) {
            c.beginPath();
            c.moveTo((i*padding) + (i*10) + 10, canvas.height/2-((frequencyData[i])/2));
-           c.lineTo((i*padding) + (i*10) + 10, canvas.height/2+((frequencyData[i])/2));
+           c.lineTo(((i+1)*padding) + ((i+1)*10) + 10, canvas.height/2-((frequencyData[i+1])/2));
            c.stroke();
        }
+
+
+
        /*P10.style.height = ((frequencyData[0] * 100) / 256) + "%";
        P20.style.height = ((frequencyData[1] * 100) / 256) + "%";
        P30.style.height = ((frequencyData[2] * 100) / 256) + "%";
