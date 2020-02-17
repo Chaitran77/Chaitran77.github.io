@@ -34,18 +34,17 @@ document.onclick = function() {
        c.fillStyle = "white";
        c.fillRect(0, 0, canvas.width, canvas.height);
        for (var i = 0; i < frequencyData.length; i++) {
-          loudnessGradient = c.createLinearGradient(0, 0, 0, frequencyData[i]);
+            loudnessGradient = c.createLinearGradient(0, 0, 0, frequencyData[i]);
            /*loudnessGradient.addColorStop(0.5, "lime");
            loudnessGradient.addColorStop(0.75, "orange");
            loudnessGradient.addColorStop(1, "red");*/
 
-              loudnessGradient.addColorStop(0.000, 'rgba(255, 0, 0, 1.000)');
-              loudnessGradient.addColorStop(0.200, 'rgba(255, 165, 0, 1.000)');
-              loudnessGradient.addColorStop(0.300, 'rgba(255, 165, 0, 1.000)');
-              loudnessGradient.addColorStop(0.500, 'rgba(0, 255, 0, 1.000)');
-              loudnessGradient.addColorStop(0.700, 'rgba(255, 165, 0, 1.000)');
-              loudnessGradient.addColorStop(0.800, 'rgba(255, 165, 0, 1.000)');
-              loudnessGradient.addColorStop(1.000, 'rgba(255, 0, 0, 1.000)');
+            loudnessGradient.addColorStop(0, 'rgba(255,0,0,1)');
+            loudnessGradient.addColorStop(0.25, 'rgba(255,165,0,1)');
+            loudnessGradient.addColorStop(0.49, 'rgba(10,251,0,1)');
+            loudnessGradient.addColorStop(0.5, 'rgba(0,255,0,1)');
+            loudnessGradient.addColorStop(0.75, 'rgba(255,165,0,1)');
+            loudnessGradient.addColorStop(1, 'rgba(255,0,0,1)');
 
            c.strokeStyle = loudnessGradient;
            c.beginPath();
