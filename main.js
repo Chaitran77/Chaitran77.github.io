@@ -34,7 +34,7 @@ document.onclick = function() {
        c.fillStyle = "white";
        c.fillRect(0, 0, canvas.width, canvas.height);
        for (var i = 0; i < frequencyData.length; i++) {
-            loudnessGradient = c.createLinearGradient(0, 0, 0, frequencyData[i]);
+            loudnessGradient = c.createLinearGradient((i*padding) + (i*10) + 10, canvas.height/2-((frequencyData[i])/2), 10, frequencyData[i]);
            /*loudnessGradient.addColorStop(0.5, "lime");
            loudnessGradient.addColorStop(0.75, "orange");
            loudnessGradient.addColorStop(1, "red");*/
