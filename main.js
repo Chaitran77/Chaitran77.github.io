@@ -25,6 +25,8 @@ document.onclick = function() {
    c.lineCap = "round";
    var padding = 5;
 
+   var loudnessGradient;
+
    let frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
    function renderFrame() {
@@ -32,20 +34,20 @@ document.onclick = function() {
        c.fillStyle = "white";
        c.fillRect(0, 0, canvas.width, canvas.height);
        for (var i = 0; i < frequencyData.length; i++) {
-var loudnessGradient = c.createLinearGradient(0, 0, 0, 500);
-   /*loudnessGradient.addColorStop(0.5, "lime");
-   loudnessGradient.addColorStop(0.75, "orange");
-   loudnessGradient.addColorStop(1, "red");*/
+          loudnessGradient = c.createLinearGradient(0, 0, 0, frequencyData[i]);
+           /*loudnessGradient.addColorStop(0.5, "lime");
+           loudnessGradient.addColorStop(0.75, "orange");
+           loudnessGradient.addColorStop(1, "red");*/
 
-      loudnessGradient.addColorStop(0.000, 'rgba(255, 0, 0, 1.000)');
-      loudnessGradient.addColorStop(0.200, 'rgba(255, 165, 0, 1.000)');
-      loudnessGradient.addColorStop(0.300, 'rgba(255, 165, 0, 1.000)');
-      loudnessGradient.addColorStop(0.500, 'rgba(0, 255, 0, 1.000)');
-      loudnessGradient.addColorStop(0.700, 'rgba(255, 165, 0, 1.000)');
-      loudnessGradient.addColorStop(0.800, 'rgba(255, 165, 0, 1.000)');
-      loudnessGradient.addColorStop(1.000, 'rgba(255, 0, 0, 1.000)');
+              loudnessGradient.addColorStop(0.000, 'rgba(255, 0, 0, 1.000)');
+              loudnessGradient.addColorStop(0.200, 'rgba(255, 165, 0, 1.000)');
+              loudnessGradient.addColorStop(0.300, 'rgba(255, 165, 0, 1.000)');
+              loudnessGradient.addColorStop(0.500, 'rgba(0, 255, 0, 1.000)');
+              loudnessGradient.addColorStop(0.700, 'rgba(255, 165, 0, 1.000)');
+              loudnessGradient.addColorStop(0.800, 'rgba(255, 165, 0, 1.000)');
+              loudnessGradient.addColorStop(1.000, 'rgba(255, 0, 0, 1.000)');
 
-   c.strokeStyle = loudnessGradient;
+           c.strokeStyle = loudnessGradient;
            c.beginPath();
            c.moveTo((i*padding) + (i*10) + 10, canvas.height/2-((frequencyData[i])/2));
            c.lineTo((i*padding) + (i*10) + 10, canvas.height/2+((frequencyData[i])/2));
