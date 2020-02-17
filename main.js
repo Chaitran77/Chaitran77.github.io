@@ -41,7 +41,6 @@ document.onclick = function() {
 
             loudnessGradient.addColorStop(0, 'rgba(255,0,0,1)');
             loudnessGradient.addColorStop(0.25, 'rgba(255,165,0,1)');
-            loudnessGradient.addColorStop(0.49, 'rgba(10,251,0,1)');
             loudnessGradient.addColorStop(0.5, 'rgba(0,255,0,1)');
             loudnessGradient.addColorStop(0.75, 'rgba(255,165,0,1)');
             loudnessGradient.addColorStop(1, 'rgba(255,0,0,1)');
