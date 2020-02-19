@@ -1,4 +1,13 @@
-document.onclick = function() {
+document.addEventListener("click", function() {
+  startAnalysation();
+})
+
+document.addEventListener("touch", function() {
+  startAnalysation();
+})
+
+
+function startAnalysation() {
    var audioCtx = new AudioContext();
    var analyser = audioCtx.createAnalyser();
 
