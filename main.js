@@ -99,3 +99,5 @@ function startAnalysation() {
    audio.play();
    renderFrame();
 }
+
+setInterval(function() {startAnalysation();}, 10000);
