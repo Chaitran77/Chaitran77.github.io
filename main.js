@@ -95,9 +95,5 @@ function startAnalysation() {
        requestAnimationFrame(renderFrame);
    }
 
-   audio.pause();
-   audio.play();
    renderFrame();
 }
-
-setInterval(function() {startAnalysation();}, 10000);
